@@ -1,0 +1,45 @@
+@charset "ISO-8859-1";
+body {
+  		font-family: Georgia, serif;
+		background-image: url("https://scontent.fccu3-1.fna.fbcdn.net/v/t1.6435-9/186480930_507827460652050_5834499858259975897_n.jpg?_nc_cat=105&ccb=1-5&_nc_sid=e3f864&_nc_ohc=AgoTMuafbeoAX_OJ2mS&_nc_ht=scontent.fccu3-1.fna&oh=00_AT9nR6GhcxVMC7ha5hGH3wGyjq7fK5ggg7k0Uz99N59XNA&oe=62298792");
+		background-size: 1640px 980px;
+	}
+	.nav
+	{
+		background-color: #FF7D33;
+		padding-top: 10px;
+		padding-bottom: 10px;
+		display: inline-block;
+		width:100%;
+	}
+	.left
+	{
+		color: #ffffff;
+		font-size:24px;
+		font-weight:bold;
+		float:left;
+		width:50%;
+		position: relative;
+		left:30px;
+	}
+	.right
+	{
+		color: #ffffff;
+		font-size:20x;
+		font-weight:bold;
+		float:right;
+		width:50%;
+		padding-top:4px;
+		text-align:right;
+		position: relative;
+		right:8px;
+	}
+	a {
+		background-color: #FF5833;
+		border-radius: 10px;
+		padding:5px;
+	}
+	a:hover {
+        background-color: #990000;
+    }
+    
