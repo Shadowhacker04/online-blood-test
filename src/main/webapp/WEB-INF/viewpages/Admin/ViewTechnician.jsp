@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 pageEncoding="ISO-8859-1"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page isELIgnored="false" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Add Technician</title>
+<title>View Technician</title>
 <link rel="stylesheet"
 href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
 integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
@@ -547,97 +548,45 @@ display: none;
 </a>
 </div>
 </div>
-
-<br><br>
-<div class="center">
-<form name="form2" method="post" action="addtechnicianprocess" class="form-horizontal" >
-<table align="center" cellpadding = "10">
-
-
-
-<!----- Technician Name ---------------------------------------------------------->
-<tr>
-<td>First NAME</td>
-<td><input type="text" value="${tech.firstname}" id="firstname" name="firstname" required/>
-</td>
+<br><br><br><br>
+<div class="container-fluid">
+<div class="row">
+<div class="col-md-2"></div>
+<div class="col-md-8">
+<div class="m-3">
+<table class="table table-striped caption-top" style="background-color:#f8f9fa;border-radius:5px;">
+<thead>
+<tr style="text-align:center">
+<th scope="col">First Name</th>
+<th scope="col">Last Name</th>
+<th scope="col">Email Id</th>
+<th scope="col">Gender</th>
+<th scope="col">Mobile no</th>
+<th scope="col">Timing</th>
+<th scope="col">Status</th>
 </tr>
-<tr>
-<td>Last NAME</td>
-<td><input type="text" value="${tech.lastname}" id="lastname" name="lastname" required/>
-</td>
+</thead>
+<tbody>
+<c:forEach var="tech" items="${techlist }">
+<tr style="text-align:center">
+<td>${tech.firstname }</td>
+<td>${tech.lastname }</td>
+<td>${tech.email }</td>
+<td>${tech.gender }</td>
+<td>${tech.phnNo }</td>
+<td>${tech.time}</td>
+<td>${tech.status}</td>
+<td><a href="active/${tech.firstname }"><button type="submit" class="btn btn-link">Activate</button></a></td>
+<td><a href="deactivated/${tech.firstname }"><button type="submit" class="btn btn-link">Deactivate</button></a></td>
+<td><a href="delete/${tech.firstname }"><button type="submit" class="btn btn-link">Delete</button></a></td>
 </tr>
-
-<!----- Email ---------------------------------------------------------->
-<tr>
-<td>Email ID</td>
-<td><input type="email" value="${tech.email}" name="email" required/>
-</td>
-</tr>
-
-
-
-<!----- Gender ------------------------------------------------->
-
-
-
-<tr>
-<td>Gender</td>
-<td>
-<select id="gender" name="gender" required="required">
-<option value="${tech.gender}" selected disabled hidden="hidden">Select......</option>
-<option value="Male">Male</option>
-<option value="Female">Female</option>
-</select>
-</td>
-</tr>
-<!----- Phone no ---------------------------------------------------------->
-<tr>
-<td>Mobile</td>
-<td><input type="number" value="${tech.phnNo}" name="phnno" required/>
-</td>
-</tr>
-<!----- Time ------------------------------------------------->
-
-
-
-<tr>
-<td>Timing</td>
-<td>
-<select id="time" name="time" required="required">
-<option value="${tech.time}" selected disabled hidden="hidden">Select......</option>
-<option value="10:00-1:00">10:00-1:00</option>
-<option value="2:00-5:00">2:00-5:00</option>
-</select>
-</td>
-</tr>
-<!----- Password ---------------------------------------------------------->
-<tr>
-<td>Password</td>
-<td><input type="password" value="${tech.passwrd}" name="passwrd" required/>
-</td>
-</tr>
-
-
-
-<!----- Status ---------------------------------------------------------->
-<tr>
-<td>Status</td>
-<td><input type="text" value="${tech.status}" name="status" required/>
-</td>
-</tr>
-
-
-
-<!----- Submit and Reset ------------------------------------------------->
-<tr>
-<td colspan="2" align="center">
-<input type="submit" value="Submit" class="btn btn-primary">
-<input type="reset" value="Reset" class="btn btn-info">
-<div> ${msg}</div>
-</td>
-</tr>
+</c:forEach>
+</tbody>
 </table>
-</form>
+</div>
+</div>
+<div class="col-md-2"></div>
+</div>
 </div>
 </div>
 </div>

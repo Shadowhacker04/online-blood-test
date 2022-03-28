@@ -14,7 +14,14 @@ public class Customer {
 	private String Q1;
 	private String Q2;
 	private String Q3;
+	private String dateofapply;
 	
+	public String getDateofapply() {
+		return dateofapply;
+	}
+	public void setDateofapply(String dateofapply) {
+		this.dateofapply = dateofapply;
+	}
 	public String getQ1() {
 		return Q1;
 	}

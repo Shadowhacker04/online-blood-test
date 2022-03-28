@@ -1,20 +1,7 @@
 package com.Project.Entity;
 
-import org.springframework.boot.autoconfigure.domain.EntityScan;
+public class Technician {
 
-/*create table Technicians(
-TechId int auto_increment primary key,
-first_name varchar(10),
-last_name varchar(10),
-email varchar(20),
-gender varchar(10),
-Phnno varchar(10),
-Timing varchar(20),
-passwrd varchar(15));*/
-
-public class Technicians {
-	
-	private int techId;
 	private String firstname;
 	private String lastname;
 	private String email;
@@ -23,14 +10,6 @@ public class Technicians {
 	private String time;
 	private String passwrd;
 	private String status;
-	
-	public int getTechId() {
-		return techId;
-	}
-	public void setTechId(int techId) {
-		this.techId = techId;
-	}
-	
 	public String getFirstname() {
 		return firstname;
 	}
@@ -72,7 +51,6 @@ public class Technicians {
 	}
 	public void setPasswrd(String passwrd) {
 		this.passwrd = passwrd;
-	
 	}
 	public String getStatus() {
 		return status;
@@ -80,12 +58,9 @@ public class Technicians {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	
-	
-	public Technicians(int techId, String firstname, String lastname, String email, String gender, String phnNo,
-			String time, String passwrd, String status) {
+	public Technician(String firstname, String lastname, String email, String gender, String phnNo, String time,
+			String passwrd, String status) {
 		super();
-		this.techId = techId;
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.email = email;
@@ -93,9 +68,9 @@ public class Technicians {
 		this.phnNo = phnNo;
 		this.time = time;
 		this.passwrd = passwrd;
-		this.status= status;
+		this.status = status;
 	}
-	public Technicians() {
+	public Technician() {
 		super();
 	}
 	

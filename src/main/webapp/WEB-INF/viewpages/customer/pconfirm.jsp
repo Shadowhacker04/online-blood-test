@@ -15,6 +15,13 @@
 	crossorigin="anonymous">
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 
     
 <style>
@@ -382,7 +389,91 @@ nav .profile-details i{
   font-weight: 400;
   color: #333;
 }
-
+body {
+	font-family: 'Varela Round', sans-serif;
+}
+.modal-confirm {		
+	color: #636363;
+	width: 400px;
+}
+.modal-confirm .modal-content {
+	padding: 20px;
+	border-radius: 5px;
+	border: none;
+	text-align: center;
+	font-size: 14px;
+}
+.modal-confirm .modal-header {
+	border-bottom: none;   
+	position: relative;
+}
+.modal-confirm h4 {
+	text-align: center;
+	font-size: 26px;
+	margin: 30px 0 -10px;
+}
+.modal-confirm .close {
+	position: absolute;
+	top: -5px;
+	right: -2px;
+}
+.modal-confirm .modal-body {
+	color: #999;
+}
+.modal-confirm .modal-footer {
+	border: none;
+	text-align: center;		
+	border-radius: 5px;
+	font-size: 13px;
+	padding: 10px 15px 25px;
+}
+.modal-confirm .modal-footer a {
+	color: #999;
+}		
+.modal-confirm .icon-box {
+	width: 80px;
+	height: 80px;
+	margin: 0 auto;
+	border-radius: 50%;
+	z-index: 9;
+	text-align: center;
+	border: 3px solid #f15e5e;
+}
+.modal-confirm .icon-box i {
+	color: #f15e5e;
+	font-size: 46px;
+	display: inline-block;
+	margin-top: 13px;
+}
+.modal-confirm .btn, .modal-confirm .btn:active {
+	color: #fff;
+	border-radius: 4px;
+	background: #60c7c1;
+	text-decoration: none;
+	transition: all 0.4s;
+	line-height: normal;
+	min-width: 120px;
+	border: none;
+	min-height: 40px;
+	border-radius: 3px;
+	margin: 0 5px;
+}
+.modal-confirm .btn-secondary {
+	background: #c1c1c1;
+}
+.modal-confirm .btn-secondary:hover, .modal-confirm .btn-secondary:focus {
+	background: #a8a8a8;
+}
+.modal-confirm .btn-danger {
+	background: #f15e5e;
+}
+.modal-confirm .btn-danger:hover, .modal-confirm .btn-danger:focus {
+	background: #ee3535;
+}
+.trigger-btn {
+	display: inline-block;
+	margin: 100px auto;
+}
 
 </style>  
    
@@ -404,7 +495,7 @@ nav .profile-details i{
         <li>
           <a href="reqtest" class="active" >
             <i class='bx bx-box' ></i>
-            <span class="links_name">View Tests/Package</span>
+            <span class="links_name">View Checkups</span>
           </a>
         </li>
         <li>
@@ -423,15 +514,21 @@ nav .profile-details i{
       </ul>
   </div>
   <section style="background-color:#F0F0F0" class="home-section">
-    <nav>
+    <nav style="background-color:#E1EBEE">
       <div class="sidebar-button">
         <i class='bx bx-menu sidebarBtn'></i>
         <span class="dashboard">Dashboard</span>
       </div>
+      <form name="myForm" method="post" action="search" onsubmit="return validateForm()">
       <div class="search-box">
-        <input type="text" placeholder="Search...">
-        <i class='bx bx-search' ></i>
+        <input name="type" list="brow" type="text" placeholder="Search..."> 
+        <button type="submit"><i class='bx bx-search' ></i></button>
+        <datalist id="brow">
+  <option value="BLOOD">
+  <option value="URINE">
+</datalist>
       </div>
+      </form>
       <div class="profile-details">
         <img src="images/profile.jpg" alt="">
         <span class="admin_name"><label>${msg}</label></span>
@@ -459,7 +556,7 @@ nav .profile-details i{
 									<div class="col-sm-10">
 										<h4 class="nomargin"><label>${pname}</label></h4>
 										<p>Tests involved: <b>${no}</b></p>
-										<p>${tests}</p>
+										<p><a href="#myModal"  data-toggle="modal">Test Details</a></p>
 										<p>${desc}</p>
 													</div>
 								</div>
@@ -474,22 +571,34 @@ nav .profile-details i{
 					</tbody>
 					<tfoot>
 						<tr>
-							<td><a href="/finalproject/home" class="btn btn-warning"><i class="fa fa-angle-left"></i> Cancel</a></td>
+							<td><a href="/finalproject/home" class="btn btn-danger"> Cancel</a></td>
 							<td colspan="2" class="hidden-xs"></td>
 							<td class="hidden-xs text-center"><strong>Total: ₹${pcost}</strong></td>
-							<td><input type="submit" value = "Make Appointment" class="btn btn-success btn-block"><i class="fa fa-angle-right"></i></td>
+							<td><input type="submit" value = "Make Appointment" class="btn btn-success btn-block"></td>
 						</tr>
 					</tfoot>
 				</table>
 </div>
      
  </form>
- 
- 
- 
-   
- 
 </section>
+ <div id="myModal" class="modal fade">
+	<div class="modal-dialog modal-confirm">
+		<div class="modal-content">
+			<div class="modal-header flex-column">					
+				<h4 class="modal-title w-100">Tests involved in this Package</h4>	
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			</div>
+			<div class="modal-body">
+				<p><b>${tests}</b></p>
+				<p>Tests may requires patient to be Postprandial or Fasting. Contact us for more details..</p>
+			</div>
+			<div class="modal-footer justify-content-center">
+				<button type="button" class="btn btn-danger" data-dismiss="modal">OK</button>
+			</div>
+		</div>
+	</div>
+</div>
 </body>
 <script>
 
@@ -519,6 +628,14 @@ if(GivenDate > CurrentDate){
     return false;
 }
 }
+
+function validateForm() {
+	  var x = document.forms["myForm"]["type"].value;
+	  if (x == "") {
+	    alert("Searchbar is Empty!");
+	    return false;
+	  }
+	}
 
 </script>
 </html>

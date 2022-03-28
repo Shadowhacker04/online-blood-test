@@ -199,7 +199,7 @@ CONFIRM PASSWORD
 <td>DATE OF BIRTH</td>
  
 <td>
-        <select name="month" onchange="call()" >
+        <select name="month" onchange="call()" required >
          <option value="" selected disabled hidden="hidden">Month</option>
          <option value="1">Jan</option>
          <option value="2">Feb</option>
@@ -214,10 +214,10 @@ CONFIRM PASSWORD
          <option value="11">Nov</option>
          <option value="12">Dec</option>
         </select>
-        <select name="year"  onchange="call()">
+        <select name="year"  onchange="call()" required>
             <option value="" selected disabled hidden="hidden">Year</option>
            </select>
-        <select name="day"  >
+        <select name="day" required >
            <option value="" selected disabled hidden="hidden">Day</option>
           </select>
                </div>
@@ -300,30 +300,6 @@ ADDRESS
 
 </div>
 </div>
-
-<div class="text-center">
-	<!-- Button HTML (to Trigger Modal) -->
-	<a href="/finalproject" id="myBtn" class="trigger-btn" data-toggle="modal" style="display: none;">Click to Open Success Modal</a>
-</div>
-
-<div id="myModal" class="modal fade">
-	<div class="modal-dialog modal-confirm">
-		<div class="modal-content">
-			<div class="modal-header justify-content-center">
-				<div class="icon-box">
-					<i class="material-icons">&#xE876;</i>
-				</div>
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-			</div>
-			<div class="modal-body text-center">
-				<h4>Great!</h4>	
-				<p>Your account has been created successfully.</p>
-              
-				<button  class="btn btn-success" data-dismiss="modal"><span>OK</span> <i class="material-icons">&#xE5C8;</i></button>
-			</div>
-		</div>
-	</div>
-</div>     
 
 
 </body>

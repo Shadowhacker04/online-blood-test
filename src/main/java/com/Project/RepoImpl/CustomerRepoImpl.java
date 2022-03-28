@@ -35,7 +35,7 @@ public class CustomerRepoImpl implements CusRepo {
 		if (book > 1)
 			return "Error, Try again later!..";
 		else
-			return "Thanks for Registering!. Note your ID: "+req.getRequestid();
+			return "Remember to mark the date on your calender!, Note your Request ID: "+req.getRequestid()+".";
 	}
 	
 
@@ -47,7 +47,7 @@ public class CustomerRepoImpl implements CusRepo {
 		List<CusRequests> req = jt.query(sql, new Object[] {customerid}, new BeanPropertyRowMapper(CusRequests.class));
 		return req;
 	}
-
+	
 	
 	@SuppressWarnings("rawtypes")
 	@Override
@@ -56,6 +56,13 @@ public class CustomerRepoImpl implements CusRepo {
 		@SuppressWarnings("unchecked")
 		List<Tests> test = jt.query(sql, new BeanPropertyRowMapper(Tests.class));
 		return test;
+	}
+	
+	@Override
+	public List<Tests> search(String type) {
+		String sql = "select * from tests where tType = ?";
+		List<Tests> req = jt.query(sql, new Object[] {type}, new BeanPropertyRowMapper(Tests.class));
+		return req;
 	}
 	
 	
@@ -81,6 +88,22 @@ public class CustomerRepoImpl implements CusRepo {
 		}
 		return inf;
 	}
+	
+	@SuppressWarnings({ "deprecation", "unchecked", "rawtypes" })
+	@Override
+	public Customer Searchcusbyph(String phone) {
+		String sql = "Select * from customer where mobileno = ?";
+		Customer inf=null;
+		try {
+			inf = (Customer)jt.queryForObject(sql, new Object[] {phone}, new BeanPropertyRowMapper(Customer.class));
+		}
+		catch(Exception ex){
+			inf=null;
+		}
+		return inf;
+	}
+	
+	
 	
 	@SuppressWarnings({ "deprecation", "unchecked", "rawtypes" })
 	@Override
@@ -114,6 +137,16 @@ public class CustomerRepoImpl implements CusRepo {
 	}
 
 
+	public String updateform(String firstname, String lastname, String email, String comment) {
+		
+		String sql = "Insert into feedback values(?,?,?,?)";
+		int r =jt.update(sql, new Object[] {firstname, lastname, email, comment});
+		if (r >= 1)
+			return "Thanks for Comment!";
+		else
+			return "Submission Failed";
+	}
+		
 	
 
 
@@ -159,14 +192,6 @@ public class CustomerRepoImpl implements CusRepo {
 		return count;
 	}
 
-
-	
-
-
-
-
-
-	
 
 	
 	

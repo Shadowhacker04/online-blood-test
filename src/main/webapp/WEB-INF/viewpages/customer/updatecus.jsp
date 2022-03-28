@@ -447,10 +447,10 @@ nav .profile-details i{
   }
 }
 .centre {
-margin: auto;
-width: 60%;
-border: 5px;
-padding: 10px;
+position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 </style>  
    
@@ -472,7 +472,7 @@ padding: 10px;
         <li>
           <a href="reqtest" >
             <i class='bx bx-box' ></i>
-            <span class="links_name">View Tests/Package</span>
+            <span class="links_name">View Checkups</span>
           </a>
         </li>
         <li>
@@ -491,15 +491,21 @@ padding: 10px;
       </ul>
   </div>
   <section style="background-color:#F0F0F0" class="home-section">
-    <nav>
+    <nav style="background-color:#E1EBEE">
       <div class="sidebar-button">
         <i class='bx bx-menu sidebarBtn'></i>
         <span class="dashboard">Dashboard</span>
       </div>
+      <form name="myForm" method="post" action="search" onsubmit="return validateForm()">
       <div class="search-box">
-        <input type="text" placeholder="Search...">
-        <i class='bx bx-search' ></i>
+        <input name="type" list="brow" type="text" placeholder="Search..."> 
+        <button type="submit"><i class='bx bx-search' ></i></button>
+        <datalist id="brow">
+  <option value="BLOOD">
+  <option value="URINE">
+</datalist>
       </div>
+      </form>
       <div class="profile-details">
         <img src="images/profile.jpg" alt="">
         <span class="admin_name"><label>${msg}</label></span>
@@ -511,7 +517,7 @@ padding: 10px;
         <div class="box">
           <div class="right-side">
           <a href="profile" >
-            <button class="btn-default btn-lg">View My Details</button>
+            <button class="btn-default btn-lg">View Profile</button>
             </a>
           </div>
           
@@ -542,54 +548,55 @@ padding: 10px;
       </div>
       </div>
     
-	    <div class="container centre">
+	    <div  class="container">
+	    
 
-<form name="reg" method="post" action="update" class="form-horizontal"  onsubmit="validate()" >
-<table align="center" cellpadding = "10">
+<form name="reg" method="post" action="update"  class="form-horizontal"  onsubmit="validate()" >
+<table  style="margin-left: 25%; margin-right: auto;" cellpadding = "10">
  
  
  <tr>
-  <td>CUSTOMER ID</td>
-  <td><input type="text" value="${inf.customerid}" id="cusid" name="cusid"  readonly/>
+  <td ><label class="form-label">CUSTOMER ID  :</label></td>
+  <td><input type="text" value="${inf.customerid}" class="form-control col-md-5" id="cusid" name="cusid"  readonly/>
   </td>
   </tr>
 <!----- First Name ---------------------------------------------------------->
 <tr>
-<td>FIRST NAME</td>
-<td><input type="text" value="${inf.firstname}"   id="name"  name="firstname" minlength="3" maxlength="15" required/>
-(max 15 characters a-z and A-Z)
+<td>FIRST NAME :</td>
+<td><input type="text" value="${inf.firstname}" class="form-control col-md-5"   id="name"  name="firstname" minlength="3" maxlength="15" required/>
+
 </td>
 </tr>
  
 <!----- Last Name ---------------------------------------------------------->
 <tr>
-<td>LAST NAME</td>
-<td><input type="text" value="${inf.lastname}" name="lastname" minlength="3"  maxlength="15"  required/>
-(max 15 characters a-z and A-Z)
+<td>LAST NAME :</td>
+<td><input type="text" value="${inf.lastname}" class="form-control col-md-5" name="lastname" minlength="3"  maxlength="15"  required/>
+
 </td>
 </tr>
 
 <!-----Email---------------------------------------------------------->
 <tr>
-<td>EMAIL</td>
-<td><input type="email" value="${inf.emailid}"  name="email"  required/>
+<td>EMAIL :</td>
+<td><input class="form-control col-md-5" type="email" value="${inf.emailid}"  name="email"  required/>
 </td>
 </tr>
 
 <!----- Date Of Birth -------------------------------------------------------->
 
 <tr>
-<td>DATE OF BIRTH</td>
-<td><input type="date" value="${inf.dob}"  name="dob"  required/>
+<td>DATE OF BIRTH :</td>
+<td><input class="form-control col-md-5" type="date" value="${inf.dob}"  name="dob"  required/>
 </td>
 </tr>
 
 <!----- Gender ------------------------------------------------->
 
 <tr>
-<td>GENDER</td>
+<td>GENDER :</td>
 <td>
-    <select id="gender" name="gender" required="required">
+    <select class="form-control col-md-5" id="gender" name="gender" required="required">
         <option value="${inf.gender}" selected disabled hidden="hidden">Select Gender</option>
         <option value="Male">Male</option>
         <option value="Female">Female</option>
@@ -600,40 +607,40 @@ padding: 10px;
 
 <tr>
 <td>
-ADDRESS
+ADDRESS :
 </td>
 <td>
-<textarea rows="4" cols="50" name="address" required>${inf.address}</textarea>
+<textarea class="form-group col-md-6" rows="3" cols="40" name="address" required>${inf.address}</textarea>
 </td>
 </tr>
 <tr>
     <td>
-        MOBILE NUMBER
+        MOBILE NUMBER :
         
     </td>
     <td>
-        <input type="tel" value="${inf.mobileno}" id="mobile" name="mobile" pattern="[0-9]{10}" title="Must be 10 digits" required>
+        <input class="form-group col-md-5" type="tel" value="${inf.mobileno}" id="mobile" name="mobile" pattern="[0-9]{10}" title="Must be 10 digits" required>
     </td>
 </tr>
 <tr>
-  <td>SECURITY QUESTIONS </td>
+  <td>SECURITY QUESTIONS:- </td>
   <td>
      Name of your first school?  
-  &nbsp; <input type="text" value="${inf.q1}"  name="ansone"  required/>
+  &nbsp; <input class="form-group col-md-3" type="text" value="${inf.q1}"  name="ansone"  required/>
 </td>
   </tr>
   <tr>
     <td></td>
     <td>
      Your childhood nickname?   
-   &nbsp; <input type="text" value="${inf.q2}"  name="anstwo"  required/>
+   &nbsp; <input class="form-group col-md-3" type="text" value="${inf.q2}"  name="anstwo"  required/>
   </td>
     </tr>
     <tr>
       <td></td>
       <td>
     In what city were you born?   
-      <input type="text" value="${inf.q3}"  name="ansthree" required />
+      <input class="form-group col-md-3" type="text" value="${inf.q3}"  name="ansthree" required />
     </td>
       </tr>
       <tr></tr>
@@ -643,8 +650,8 @@ ADDRESS
 <!----- Submit and Reset ------------------------------------------------->
 <tr>
     <td colspan="2" align="center">
-    <input type="submit" value="Submit">
-    <input type="reset" value="Restore Default">
+    <input class="btn btn-primary" type="submit" value="Submit">
+    <input class="btn btn-danger" type="reset" value="Restore Default">
   <div> ${masg}</div>
     </td>
     </tr>

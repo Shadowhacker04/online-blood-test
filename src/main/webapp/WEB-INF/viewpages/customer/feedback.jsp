@@ -510,7 +510,7 @@ nav .profile-details i{
         <li>
           <a href="reqtest" >
             <i class='bx bx-box' ></i>
-            <span class="links_name">View Tests/Package</span>
+            <span class="links_name">View Checkups</span>
           </a>
         </li>
         <li>
@@ -529,15 +529,21 @@ nav .profile-details i{
       </ul>
   </div>
   <section style="background-color:#F0F0F0" class="home-section">
-    <nav>
+    <nav style="background-color:#E1EBEE">
       <div class="sidebar-button">
         <i class='bx bx-menu sidebarBtn'></i>
         <span class="dashboard">Dashboard</span>
       </div>
+      <form name="myForm" method="post" action="search" onsubmit="return validateForm()">
       <div class="search-box">
-        <input type="text" placeholder="Search...">
-        <i class='bx bx-search' ></i>
+        <input name="type" list="brow" type="text" placeholder="Search..."> 
+        <button type="submit"><i class='bx bx-search' ></i></button>
+        <datalist id="brow">
+  <option value="BLOOD">
+  <option value="URINE">
+</datalist>
       </div>
+      </form>
       <div class="profile-details">
         <img src="images/profile.jpg" alt="">
         <span class="admin_name"><label>${msg}</label></span>
@@ -549,7 +555,7 @@ nav .profile-details i{
         <div class="box">
           <div class="right-side">
           <a href="profile" >
-            <button class="btn-default btn-lg">View My Details</button>
+            <button class="btn-default btn-lg">View Profile</button>
             </a>
           </div>
           
@@ -579,19 +585,12 @@ nav .profile-details i{
         </div>
       </div>
       </div>
-    
 	<div class="container contact">
-	<div class="row">
-		<div class="col-md-3">
-			<div class="contact-info">
-				<img src="https://image.ibb.co/kUASdV/contact-image.png" alt="image"/>
-				<h2>Contact Us</h2>
-				<h4>We would love to hear from you !</h4>
-			</div>
-		</div>
 		<div class="col-md-9">
+		<form method="post" action="feedsub" >
 			<div class="contact-form">
 				<div class="form-group">
+				
 				  <label class="control-label col-sm-2" for="fname">First Name:</label>
 				  <div class="col-sm-10">          
 					<input type="text" class="form-control" id="fname" placeholder="Enter First Name" name="fname">
@@ -612,20 +611,34 @@ nav .profile-details i{
 				<div class="form-group">
 				  <label class="control-label col-sm-2" for="comment">Comment:</label>
 				  <div class="col-sm-10">
-					<textarea class="form-control" rows="5" id="comment"></textarea>
+					<textarea class="form-control" rows="5" name="comment" id="comment"></textarea>
 				  </div>
 				</div>
 				<div class="form-group">        
 				  <div class="col-sm-offset-2 col-sm-10">
 					<button type="submit" class="btn btn-default">Submit</button>
+					<br><br>
+					${res}
 				  </div>
 				</div>
 			</div>
+			</form>
 		</div>
 	</div>
-</div>
+
      
  
 </section>
+<script>
+
+function validateForm() {
+	  var x = document.forms["myForm"]["type"].value;
+	  if (x == "") {
+	    alert("Searchbar is Empty!");
+	    return false;
+	  }
+	}
+
+</script>
 </body>
 </html>

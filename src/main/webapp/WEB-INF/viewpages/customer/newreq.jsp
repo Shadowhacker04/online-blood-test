@@ -632,7 +632,7 @@ img {
         <li>
           <a href="reqtest" class="active" >
             <i class='bx bx-box' ></i>
-            <span class="links_name">View Tests/Package</span>
+            <span class="links_name">View Checkups</span>
           </a>
         </li>
         <li>
@@ -651,15 +651,21 @@ img {
       </ul>
   </div>
   <section style="background-color:#F0F0F0" class="home-section">
-    <nav>
+    <nav style="background-color:#E1EBEE">
       <div class="sidebar-button">
         <i class='bx bx-menu sidebarBtn'></i>
         <span class="dashboard">Dashboard</span>
       </div>
+    <form name="myForm" method="post" action="search" onsubmit="return validateForm()">
       <div class="search-box">
-        <input type="text" placeholder="Search...">
-        <i class='bx bx-search' ></i>
+        <input name="type" list="brow" type="text" placeholder="Search..."> 
+        <button type="submit"><i class='bx bx-search' ></i></button>
+        <datalist id="brow">
+  <option value="BLOOD">
+  <option value="URINE">
+</datalist>
       </div>
+      </form>
       <div class="profile-details">
         <img src="images/profile.jpg" alt="">
         <span class="admin_name"><label>${msg}</label></span>
@@ -756,6 +762,17 @@ img {
                     $(targetBox).show();
                 });
             });
+            
+            function validateForm() {
+          	  var x = document.forms["myForm"]["type"].value;
+          	  if (x == "") {
+          	    alert("Searchbar is Empty!");
+          	    return false;
+          	  }
+          	}   
+            
+            
+            
         </script>
 
 

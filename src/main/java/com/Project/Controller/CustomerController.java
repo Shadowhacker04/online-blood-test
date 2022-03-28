@@ -16,6 +16,8 @@ import com.Project.Entity.Customer;
 import com.Project.Entity.Packages;
 import com.Project.Entity.Tests;
 import com.Project.Repo.CusRepo;
+import com.Project.RepoImpl.CustomerRepoImpl;
+import com.Project.RepoImpl.TechnicianRepoImpl;
 
 
 @Controller
@@ -24,9 +26,16 @@ public class CustomerController {
 	static String vari = null;
 	static String testname = null;
 	static String packnam = null;
+	static String temp = null;
+	
+	@Autowired
+	CustomerRepoImpl cr;
 
 	@Autowired
 	CusRepo ir;
+	
+	@Autowired
+	TechnicianRepoImpl tr;
 	
 	@GetMapping("/cusreg")
 	public String Addinfo(Model m)
@@ -86,22 +95,6 @@ public class CustomerController {
 	}
 }
 	
-	
-	@GetMapping("reqtest")
-	public ModelAndView requesttest(Model m)
-	{
-		Customer inf = ir.Searchcus(vari);
-		String name = inf.getFirstname();
-		List<Tests> test = ir.viewtests();
-		List<Packages> pack = ir.viewpack();
-		ModelAndView m1 = new ModelAndView("/customer/newreq");
-		m1.addObject("test", test);
-		m1.addObject("pack", pack);
-		m1.addObject("msg", name);
-		return m1;
-		
-	}
-		
 	
 	@GetMapping("home")
 	public String homepage(Model m)
@@ -197,6 +190,8 @@ public class CustomerController {
 	public String booktest(@RequestParam("ideal") String reqid, @RequestParam("date") String date, Model m) {
 		Tests tst = ir.Searchtest(testname);
 		CusRequests req = new CusRequests();
+		Customer inf = ir.Searchcus(vari);
+		String name = inf.getFirstname();
 		req.setRequestid(reqid);
 		req.setDateofrequest(date);
 		req.setCost(tst.getCost());
@@ -205,14 +200,19 @@ public class CustomerController {
 		req.setStatus("Open");
 		String st = ir.booktest(req);
 		m.addAttribute("msg", st);
+		m.addAttribute("name", name);
 		testname = null;
-		return "/customer/homepage";
+		return "/customer/resultpage";
 	}
+	
+	
 	
 	@PostMapping("bookpack")	
 	public String bookpack(@RequestParam("idealp") String requid, @RequestParam("datep") String datep, Model m) {
 		Packages pac = ir.Searchpack(packnam);
 		CusRequests req = new CusRequests();
+		Customer inf = ir.Searchcus(vari);
+		String name = inf.getFirstname();
 		req.setRequestid(requid);
 		req.setDateofrequest(datep);
 		req.setCost(pac.getCost());
@@ -221,8 +221,9 @@ public class CustomerController {
 		req.setStatus("Open");
 		String st = ir.booktest(req);
 		m.addAttribute("msg", st);
+		m.addAttribute("name", name);
 		packnam = null;
-		return "/customer/homepage";
+		return "/customer/resultpage";
 	}
 	
 	
@@ -232,6 +233,7 @@ public class CustomerController {
 	CusRequests cr = new CusRequests();
 	cr.setRequestid(requestid);
 	String st = ir.requests("Closed", cr);
+	tr.custechupdate("Closed by Customer", cr);
 	if(st.equals("Failure"))
 		m.addAttribute("msg", "Info Updated!..");
 	else
@@ -264,6 +266,16 @@ public class CustomerController {
 			
 	}
 	
+	
+	@PostMapping("feedsub")
+	public String feedbacksubmit(@RequestParam("fname") String firstname, @RequestParam("lname") String lastname, 
+			@RequestParam("email") String email, @RequestParam("comment") String comment, Model m)
+	{
+		String res = cr.updateform(firstname, lastname, email, comment );
+		m.addAttribute("res", res);
+		return "/customer/feedback";
+		
+	}
 
 	@PostMapping("proceed")
 	public String chngpswrd(@RequestParam("password") String password, @RequestParam("newpassword") String newpassword, Model m)
@@ -272,7 +284,7 @@ public class CustomerController {
 		
 if((inf.getPassword()).equals(newpassword)) {
 			
-	m.addAttribute("error", "New password cannot be same as new!..");}
+	m.addAttribute("error", "New password cannot be same as old!..");}
 else {
 	
 	String name = inf.getFirstname();
@@ -290,6 +302,99 @@ else {
 		return "/customer/paswrd";
 	}		
 	
+	@PostMapping("recover")
+	public String passrecovery(@RequestParam("pass") String newpassword, Model m)
+	{
+		Customer inf = ir.Searchcus(temp);
+		
+		if((inf.getPassword()).equals(newpassword)) {
+			
+			m.addAttribute("error", "New password cannot be same as old!..");
+		}
+		else {
+		String st =	ir.updatePassword(temp, newpassword);
+			if(st.equals("Failure")) { 
+				temp = null;
+				m.addAttribute("error", "Info Updated!..");
+				}
+			else {
+				m.addAttribute("error", "Error occured, try again!");	
+			}	
+	 }
+		return "/customer/finalpass";
+}	
+	
+	
+	
+	@PostMapping("getuid")
+	public String chnguid(@RequestParam("mobile") String phone, @RequestParam("qone") String qone, @RequestParam("qtwo") String qtwo, @RequestParam("qthree") String qthree, Model m)
+	{
+		Customer inf = ir.Searchcusbyph(phone);
+		if(inf!=null) {
+		if((phone.equals(inf.getMobileno())) && (qone.equalsIgnoreCase(inf.getQ1())) && 
+				(qtwo.equalsIgnoreCase(inf.getQ2())) && (qthree.equalsIgnoreCase(inf.getQ3()))) {
+			
+			temp = inf.getCustomerid();
+			return "redirect:/validate";
+		}
+		
+		else {
+			m.addAttribute("msg", "Please check your input!");
+			return "/customer/forget";
+		}
+		}
+		else {
+			m.addAttribute("msg", "Please check your input!");
+			return "/customer/forget";
+		}
+	}
+	
+	
+	@GetMapping("validate")
+	public String validate(Model m)
+	{
+		Customer inf = ir.Searchcus(temp);
+		String phone = inf.getMobileno();
+		String qone = inf.getQ1();
+		String qtwo = inf.getQ2();
+		String qthree = inf.getQ3();
+		String cusid = inf.getCustomerid();
+		m.addAttribute("phone", phone);
+		m.addAttribute("qone", qone);
+		m.addAttribute("qtwo", qtwo);
+		m.addAttribute("qthree", qthree);
+		m.addAttribute("cusid", cusid);
+		temp = null;
+		return "/customer/validate";
+		
+	}
+	
+	
+	@PostMapping("getpswd")
+	public String chngpswd(@RequestParam("uid") String customerid, @RequestParam("phone") String mobile,
+			@RequestParam("email") String email, @RequestParam("qone") String qone,
+			@RequestParam("qtwo") String qtwo, @RequestParam("qthree") String qthree, Model m)
+	{
+		Customer inf = ir.Searchcus(customerid);
+if(inf!=null) {
+		if((customerid.equals(inf.getCustomerid())) && (qone.equalsIgnoreCase(inf.getQ1())) && 
+				(qtwo.equalsIgnoreCase(inf.getQ2())) && (qthree.equalsIgnoreCase(inf.getQ3())) && 
+				(mobile.equalsIgnoreCase(inf.getMobileno())) && (email.equalsIgnoreCase(inf.getEmailid())) ){
+			
+			temp = customerid;
+			return "/customer/finalpass";
+		}
+
+		else {
+			m.addAttribute("msg", "Please check your input!");
+			return "/customer/forget";
+			}
+		}
+else {
+			m.addAttribute("msg", "Please check your input!");
+			return "/customer/forget";
+		}
+	}
 	
 	
 	
@@ -340,7 +445,7 @@ else {
 	
 	
 	
-	@PostMapping("login")	
+/*	@PostMapping("login")	
 	public String login(@RequestParam("username") String uname, @RequestParam("password") String passwrd, @RequestParam("usertype") String usertype, Model m) {
 		
 		if(usertype.equalsIgnoreCase("customer")) {
@@ -359,7 +464,7 @@ else {
 				m.addAttribute("msg","Wrong Username / Password");
 				return "/index";
 			}
-	}
+	}*/
 	
 	
 	
@@ -373,10 +478,10 @@ else {
 	}
 	
 	
-	@GetMapping("broken")
-	public String broken(Model m)
+	@GetMapping("forget")
+	public String forget(Model m)
 	{
-		return "/customer/broken";
+		return "/customer/forget";
 		
 	}
 	
@@ -400,6 +505,46 @@ else {
 		String name = inf.getFirstname();
 		m.addAttribute("msg", name);
 		return "/customer/paswrd";
+		
+	}
+	
+	
+	@GetMapping("reqtest")
+	public ModelAndView requesttest(Model m)
+	{
+		Customer inf = ir.Searchcus(vari);
+		String name = inf.getFirstname();
+		List<Tests> test = ir.viewtests();
+		List<Packages> pack = ir.viewpack();
+		ModelAndView m1 = new ModelAndView("/customer/newreq");
+		m1.addObject("test", test);
+		m1.addObject("pack", pack);
+		m1.addObject("msg", name);
+		return m1;
+		
+	}
+		
+	@PostMapping("search")	
+	public String search(@RequestParam("type") String type, Model m) {
+		List<Tests> test = ir.search(type);
+		Customer inf = ir.Searchcus(vari);
+		String name = inf.getFirstname();
+		m.addAttribute("msg", name);
+		m.addAttribute("test", test);
+		return "/customer/search";
+	}
+	
+
+////////////////////////////////////////////UNDER CONSTRUCTION//////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	
+	
+	
+	@GetMapping("demo")
+	public String demo(Model m)
+	{
+		
+		return "/customer/demo";
 		
 	}
 	

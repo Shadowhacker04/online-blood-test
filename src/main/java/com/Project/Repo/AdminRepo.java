@@ -1,30 +1,30 @@
 package com.Project.Repo;
 
-import java.util.*;
-import com.Project.Entity.Tests;
-import com.Project.Entity.Technicians;
-import com.Project.Entity.Customer;
+import java.util.List;
+
+import com.Project.Entity.CusTech;
 import com.Project.Entity.Packages;
-import com.Project.Entity.Request;
+import com.Project.Entity.Technician;
+import com.Project.Entity.Tests;
+
 
 public interface AdminRepo {
-
-	public String addTest(Tests t);
+	
+	public boolean addTest(Tests t);
 	public List<Tests> showAllTests();
+	public Tests getTestByName(String testname);
 	
+	public boolean addTechnician(Technician tech);
+	public List<Technician> showAllTechnicians();
+	public Technician getTechnicianByName(String firstname);
 	
-	public String addTechnician(Technicians tech);
-	public List<Technicians> showAllTechnicians();
-	public Technicians getTechnicianById(int techid);
+	public boolean addCusTechMap(String requestid, String techassign);
+	public List<CusTech> showAllCusTechMap();
+	public CusTech getMapTechnician(String techassign);
+	public CusTech getMapRequest(String requestid);
 	
-	public List<Request> showAllRequests();
-	public List<Customer> showAllCustomer();
-	
-	public boolean addPackage(Packages p);
-	public List<Packages> showPackage();
-	
-	public String ActivateTechnicianById(int techid);
-	public String DeactivateTechnicianById(int techid);
-	public String DeleteTechnicianById(int techid);
-
+	public String activateTechnicianByName(String firstname);
+	public String deactivateTechnicianByName(String firstname);
+	public String deleteTechnicianByName(String firstname);
+	public String Addpack(Packages pac);
 }

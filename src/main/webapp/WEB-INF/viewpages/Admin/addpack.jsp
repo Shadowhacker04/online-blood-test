@@ -1,23 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ page isELIgnored="false" %>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-	<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>HomePage</title>
-  <%--   <link rel="stylesheet" href="/cus/style.css"> --%>
+
     <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
 	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
 	crossorigin="anonymous">
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+     
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
 @charset "UTF-8";
@@ -452,147 +454,253 @@ nav .profile-details i{
     display: none;
   }
 }
-.button {
-  background-color: #101010;
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
-}
-.buttonw {
-  background-color: #B0B0B0;
-  border: none;
-  color: grey;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  pointer-events: none;
+.mt-100 {
+    margin-top: 100px
 }
 
+.mb-30 {
+    margin-bottom: 30px
+}
+
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid #d2d2dc;
+    border-radius: 0
+}
+
+.card .card-body {
+    padding: 1.25rem 1.75rem
+}
+
+.card-body {
+    flex: 1 1 auto;
+    padding: 1.25rem
+}
+
+.card .card-title {
+    color: #000000;
+    margin-bottom: 0.625rem;
+    text-transform: capitalize;
+    font-size: 0.875rem;
+    font-weight: 500
+}
+
+.card .card-description {
+    margin-bottom: .875rem;
+    font-weight: 400;
+    color: #76838f
+}
+
+p {
+    font-size: 0.875rem;
+    margin-bottom: .5rem;
+    line-height: 1.5rem
+}
+
+label.check {
+    cursor: pointer
+}
+
+label.check input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    visibility: hidden;
+    pointer-events: none
+}
+
+label.check span {
+    padding: 7px 14px;
+    border: 2px solid #8f37aa;
+    display: inline-block;
+    color: #8f37aa;
+    border-radius: 3px;
+    text-transform: uppercase
+}
+
+label.check input:checked+span {
+    border-color: #8f37aa;
+    background-color: #8f37aa;
+    color: #fff
+}
 </style>  
    
    </head>
 <body>
   
-  <div class="sidebar">
-    <div class="logo-details">
-      <i class='bx bxl-c-plus-plus'></i>
-      <span class="logo_name">Customer</span>
-    </div>
-      <ul class="nav-links">
-        <li>
-			<a href="home">
-            <i class='bx bx-grid-alt' ></i>
-            <span class="links_name">Home</span>
-          </a>
-        </li>
-        <li>
-          <a href="reqtest" >
-            <i class='bx bx-box' ></i>
-            <span class="links_name">View Checkups</span>
-          </a>
-        </li>
-        <li>
-          <a href="requests" class="active">
-            <i class='bx bx-list-ul' ></i>
-            <span class="links_name">View Request</span>
-          </a>
-        </li>
-        <li>
-        <li class="log_out">
-          <a href="logout">
-            <i class='bx bx-log-out'></i>
-            <span class="links_name">Log out</span>
-          </a>
-        </li>
-      </ul>
-  </div>
+ <div class="sidebar">
+<div class="logo-details">
+<i class='bx bxl-c-plus-plus'></i>
+<span class="logo_name">Admin</span>
+</div>
+<ul class="nav-links">
+<li>
+<a href="adminhome" class="active">
+<i class='bx bx-grid-alt' ></i>
+<span class="links_name">Home</span>
+</a>
+</li>
+<li>
+<a href="addtest" >
+<i class='bx bx-box' ></i>
+<span class="links_name">Add Test</span>
+</a>
+</li>
+<li>
+<a href="addpack" >
+<i class='bx bx-box' ></i>
+<span class="links_name">Add Package</span>
+</a>
+</li>
+<li>
+<a href="addtechnician">
+<i class='bx bx-list-ul' ></i>
+<span class="links_name">Add Technician</span>
+</a>
+</li>
+<li>
+<li class="log_out">
+<a href="/finalproject">
+<i class='bx bx-log-out'></i>
+<span class="links_name">Log out</span>
+</a>
+</li>
+</ul>
+</div>
   <section style="background-color:#F0F0F0" class="home-section">
     <nav style="background-color:#E1EBEE">
       <div class="sidebar-button">
         <i class='bx bx-menu sidebarBtn'></i>
         <span class="dashboard">Dashboard</span>
       </div>
-      <form name="myForm" method="post" action="search" onsubmit="return validateForm()">
       <div class="search-box">
-        <input name="type" list="brow" type="text" placeholder="Search..."> 
-        <button type="submit"><i class='bx bx-search' ></i></button>
-        <datalist id="brow">
-  <option value="BLOOD">
-  <option value="URINE">
-</datalist>
+        <input type="text" placeholder="Search...">
+        <i class='bx bx-search' ></i>
       </div>
-      </form>
       <div class="profile-details">
         <img src="images/profile.jpg" alt="">
-        <span class="admin_name"><label>${name}</label></span>
+        <span class="admin_name"><label>${msg}</label></span>
       </div>
     </nav>
     
-    <div class="home-content">
-      </div>
+    <div class="home-content"></div>
     
-<table class="table table-striped" id="myTable" style="margin-left: auto; width:100%" border="1" >
-<tr><td colspan="9" style="text-align:center;">
-<h2>All Requests</h2>
-</td></tr>
-<tr>
-<th class="table-primary">Customer ID</th>
-<th class="table-primary">Appointment On</th>
-<th class="table-primary">Requested On</th>
-<th class="table-primary">Name of Test/Package</th>
-<th class="table-primary">Total Cost</th>
-<th class="table-primary">Status</th>
-<th class="table-primary">Technician Assigned</th>
-<th class="table-primary">RequestID</th>
-<th class="table-primary">Actions</th>
-</tr>
-<c:forEach var="st" items="${req}">   
-   <tr>  
-   <td>${st.customerid}</td>  
-    <td>${st.dateofrequest}</td>
-    <td>${st.dateofapply}</td>
-    <td>${st.name}</td>   
-    <td>${st.cost}</td>
-    <td >${st.status}</td>  
-    <td>${st.assigned}</td>
-    <td>${st.requestid}</td><td>
-    <c:set var="but" value="${st.status}"/>
-    <c:if test="${but != 'Closed'}"> 
-    <form onsubmit="return confirm('Are you sure to close request?');" method="post" action="requests/${st.requestid}">
-    <button class="button" type="submit" >Close</button>
-   </form>
-   </c:if>
-   <c:if test="${but == 'Closed'}"> 
-    <form method="post" action="requests/${st.requestid}">
-    <button class="buttonw" type="submit" disabled>You've Closed</button>
-   </form>
-   </c:if>
-    </td>
-   </tr>  
-</c:forEach> 
-</table>
-<label>${msg}</label>
+    
+	<form method="POST" action="packsub"   class="container">
+PACKAGE NAME: <input type="text" id="packname" name="packname" oninput="gen()" required > <br><br>
+NO OF TESTS :  <select class="mySelectBox" name="number" id="checkbox" required>
+    <option value="" selected disabled hidden="hidden">Select</option>
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+    <option value="6">6</option>
+    <option value="7">7</option>
+    <option value="8">8</option>
+    <option value="9">9</option>
+    <option value="10">10</option>
+  </select>
+  <br><br>
+ <table class="Tests select gfg" ><tr><td>
+<div class="row">
+       <c:forEach var="st" items="${test}">
+      <div class="column">
+        
+       
+          <input type="checkbox" name="box1" onchange="confirmingChange()"  value="${st.tname}" > ${st.tname}
+          <input class="form-group col-md-3" value=" ₹ ${st.cost}" disabled><br><br>
      
+        
+        
+      </div>
+      </c:forEach>
+      </div>
+       </td>
+</table>
+      <br><br>
+   COST:   <input class="form-group col-md-3" id="non" type="text" name="packcost"> ₹
+   
+   <br><br>
+   PACKAGE ID: <input class="form-group col-md-4" id="none" type="text" name="id" readonly>
+   <br><br>
+ DESCRIPTION :  <textarea id="desc" name="desc" rows="4" cols="50" required></textarea>
  
+    <div class="col-sm-12 text-right">
+   <input id="qwert" type="text" name="tests" hidden readonly>
+   
+
+   
+   
+      <button class="btn btn-lg" type="submit">Submit</button>
+    </div>
+    
+
+</form>
 </section>
+
 <script>
-function validateForm() {
-	  var x = document.forms["myForm"]["type"].value;
-	  if (x == "") {
-	    alert("Searchbar is Empty!");
-	    return false;
-	  }
-	}
+$('[data-toggle="buttons"] .btn').on('click', function () {
+    // toggle style
+    $(this).toggleClass('btn-success btn-danger active');
+    
+    // toggle checkbox
+    var $chk = $(this).find('[type=checkbox]');
+    $chk.prop('checked',!$chk.prop('checked'));
+    
+    return false;
+});
+
+
+var $ckb = $('[name*=box]'),
+$sel = $('.mySelectBox');
+
+function ckkk () {
+
+var ckd = $ckb.filter(":checked").length,
+  max = parseInt($sel.val(), 10);
+
+if(ckd > max) $ckb.prop({checked:false, disabled:false});
+else        $ckb.not(":checked").prop({disabled: ckd >= max});
+
+
+}
+
+$ckb.add($sel).on("change", ckkk);
+
+function confirmingChange() {
+var valuesArray = $('input:checkbox:checked').map( function() {
+	return this.value;
+}).get().join(",");
+
+document.getElementById("qwert").value = valuesArray;
+
+}
+
+var pass=document.getElementById("none");
+function gen() {
+ var name =document.getElementById("packname").value;
+   var chars = "0123456789";
+   var passwordLength = 2;
+   var pass = "";
+for (var i = 0; i <= passwordLength; i++) {
+  var randomNumber = Math.floor(Math.random() * chars.length);
+  pass += chars.substring(randomNumber, randomNumber +1);
+ }
+		var slice = name.slice(0, 3);
+       var id = "PAC"+slice.toUpperCase()+pass;
+       document.getElementById("none").value = id;
+}
 
 </script>
+
+
+
 </body>
 </html>

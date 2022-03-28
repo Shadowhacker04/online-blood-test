@@ -10,7 +10,21 @@ public class CusRequests {
 	private String status;
 	private String assigned;
 	private String requestid;
+	private String dateofapply;
+	private String adminassign;
 	
+	public String getAdminassign() {
+		return adminassign;
+	}
+	public void setAdminassign(String adminassign) {
+		this.adminassign = adminassign;
+	}
+	public String getDateofapply() {
+		return dateofapply;
+	}
+	public void setDateofapply(String dateofapply) {
+		this.dateofapply = dateofapply;
+	}
 	public String getCustomerid() {
 		return customerid;
 	}

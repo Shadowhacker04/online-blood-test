@@ -5,7 +5,7 @@ pageEncoding="ISO-8859-1"%>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Add Technician</title>
+<title>Add Test</title>
 <link rel="stylesheet"
 href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
 integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
@@ -548,86 +548,50 @@ display: none;
 </div>
 </div>
 
-<br><br>
+<br><br><br><br>
 <div class="center">
-<form name="form2" method="post" action="addtechnicianprocess" class="form-horizontal" >
+<form name="form1" method="post" action="addtestprocess" class="form-horizontal" >
 <table align="center" cellpadding = "10">
 
 
 
-<!----- Technician Name ---------------------------------------------------------->
+<!----- Test Name ---------------------------------------------------------->
 <tr>
-<td>First NAME</td>
-<td><input type="text" value="${tech.firstname}" id="firstname" name="firstname" required/>
+<td>Test NAME</td>
+<td><input type="text" value="${t.testname}" id="testname" name="testname" required/>
 </td>
 </tr>
+<!----- cost---------------------------------------------------------->
 <tr>
-<td>Last NAME</td>
-<td><input type="text" value="${tech.lastname}" id="lastname" name="lastname" required/>
+<td>Cost</td>
+<td><input type="number" value="${t.cost}" name="cost" required/>
 </td>
 </tr>
-
-<!----- Email ---------------------------------------------------------->
-<tr>
-<td>Email ID</td>
-<td><input type="email" value="${tech.email}" name="email" required/>
-</td>
-</tr>
-
-
-
-<!----- Gender ------------------------------------------------->
+<!----- Test Type ------------------------------------------------->
 
 
 
 <tr>
-<td>Gender</td>
+<td>Test Type</td>
 <td>
-<select id="gender" name="gender" required="required">
-<option value="${tech.gender}" selected disabled hidden="hidden">Select......</option>
-<option value="Male">Male</option>
-<option value="Female">Female</option>
+<select id="testtype" name="testtype" required="required">
+<option value="${t.testype}" selected disabled hidden="hidden">Select......</option>
+<option value="Blood">Blood</option>
+<option value="Urine">Urine</option>
 </select>
 </td>
 </tr>
-<!----- Phone no ---------------------------------------------------------->
+<!----- Test Taken Time ------------------------------------------------->
 <tr>
-<td>Mobile</td>
-<td><input type="number" value="${tech.phnNo}" name="phnno" required/>
-</td>
-</tr>
-<!----- Time ------------------------------------------------->
-
-
-
-<tr>
-<td>Timing</td>
+<td>Test Taken Time</td>
 <td>
-<select id="time" name="time" required="required">
-<option value="${tech.time}" selected disabled hidden="hidden">Select......</option>
-<option value="10:00-1:00">10:00-1:00</option>
-<option value="2:00-5:00">2:00-5:00</option>
+<select id="testtakentime" name="testtakentime" required="required">
+<option value="${t.testtakentime}" selected disabled hidden="hidden">Select......</option>
+<option value="Fasting">Fasting</option>
+<option value="Postprandial">Postprandial</option>
 </select>
 </td>
 </tr>
-<!----- Password ---------------------------------------------------------->
-<tr>
-<td>Password</td>
-<td><input type="password" value="${tech.passwrd}" name="passwrd" required/>
-</td>
-</tr>
-
-
-
-<!----- Status ---------------------------------------------------------->
-<tr>
-<td>Status</td>
-<td><input type="text" value="${tech.status}" name="status" required/>
-</td>
-</tr>
-
-
-
 <!----- Submit and Reset ------------------------------------------------->
 <tr>
 <td colspan="2" align="center">
